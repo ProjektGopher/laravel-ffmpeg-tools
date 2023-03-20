@@ -14,7 +14,7 @@ This **completely bonkers** string will calculate _just_ the `x` position of a t
 This package allows you to build these string in a fluent way that's easily maintainable in a way that feels familiar to php and Laravel devs. The following example will output the exact same string as above, but imagine how much easier it'll be to change:
 ```php
 $finalXpos = '(w*7/8)-text_w';
-$posX = (new Tween)
+$x = (new Tween())
     ->from("{$finalXpos}-200")
     ->to($finalXpos)
     ->delay(Timing::seconds(5))
@@ -41,8 +41,16 @@ For now this package can only be used within a Laravel app, but there are plans 
 ## Usage
 
 ```php
-$fFMpegTween = new ProjektGopher\FFMpegTween();
-echo $fFMpegTween->echoPhrase('Hello, ProjektGopher!');
+use ProjektGopher\FFMpegTween\Tween;
+use ProjektGopher\FFMpegTween\Timing;
+use ProjektGopher\FFMpegTween\Enums\Ease;
+
+$x = (new Tween())
+    ->from("50")
+    ->to("100")
+    ->delay(Timing::seconds(1))
+    ->duration(Timing::milliseconds(300))
+    ->ease(Ease::OutSine);
 ```
 
 ## Testing
