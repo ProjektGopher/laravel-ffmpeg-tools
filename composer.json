@@ -34,8 +34,7 @@
     },
     "autoload": {
         "psr-4": {
-            "ProjektGopher\\FFMpegTween\\": "src/",
-            "ProjektGopher\\FFMpegTween\\Database\\Factories\\": "database/factories/"
+            "ProjektGopher\\FFMpegTween\\": "src/"
         }
     },
     "autoload-dev": {
