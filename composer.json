@@ -1,17 +1,17 @@
 {
-    "name": ":vendor_slug/:package_slug",
-    "description": ":package_description",
+    "name": "projektgopher/laravel-ffmpeg-tween",
+    "description": "Generates strings for use in ffmpeg commands to tween between values with easings.",
     "keywords": [
-        ":vendor_name",
+        "ProjektGopher",
         "laravel",
-        ":package_slug"
+        "laravel-ffmpeg-tween"
     ],
-    "homepage": "https://github.com/:vendor_slug/:package_slug",
+    "homepage": "https://github.com/projektgopher/laravel-ffmpeg-tween",
     "license": "MIT",
     "authors": [
         {
-            "name": ":author_name",
-            "email": "author@domain.com",
+            "name": "Len Woodward",
+            "email": "Len@ProjektGopher.com",
             "role": "Developer"
         }
     ],
@@ -30,18 +30,17 @@
         "pestphp/pest-plugin-laravel": "^2.0",
         "phpstan/extension-installer": "^1.1",
         "phpstan/phpstan-deprecation-rules": "^1.0",
-        "phpstan/phpstan-phpunit": "^1.0",
-        "spatie/laravel-ray": "^1.26"
+        "phpstan/phpstan-phpunit": "^1.0"
     },
     "autoload": {
         "psr-4": {
-            "VendorName\\Skeleton\\": "src/",
-            "VendorName\\Skeleton\\Database\\Factories\\": "database/factories/"
+            "ProjektGopher\\FFMpegTween\\": "src/",
+            "ProjektGopher\\FFMpegTween\\Database\\Factories\\": "database/factories/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "VendorName\\Skeleton\\Tests\\": "tests/"
+            "ProjektGopher\\FFMpegTween\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -61,10 +60,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "VendorName\\Skeleton\\SkeletonServiceProvider"
+                "ProjektGopher\\FFMpegTween\\FFMpegTweenServiceProvider"
             ],
             "aliases": {
-                "Skeleton": "VendorName\\Skeleton\\Facades\\Skeleton"
+                "FFMpegTween": "ProjektGopher\\FFMpegTween\\Facades\\FFMpegTween"
             }
         }
     },
