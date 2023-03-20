@@ -35,5 +35,4 @@ enum Ease: string
     case InBounce = 'EaseInBounce';
     case OutBounce = 'EaseOutBounce';
     case InOutBounce = 'EaseInOutBounce';
-
 }

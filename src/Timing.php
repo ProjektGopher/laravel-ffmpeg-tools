@@ -6,8 +6,8 @@ class Timing
 {
     public function __construct(
         public float $seconds,
-    )
-    {}
+    ) {
+    }
 
     public static function seconds(float $seconds): self
     {
@@ -24,7 +24,8 @@ class Timing
         return self::milliseconds($milliseconds);
     }
 
-    public function __toString():string{
+    public function __toString(): string
+    {
         return (string) $this->seconds;
     }
 }
