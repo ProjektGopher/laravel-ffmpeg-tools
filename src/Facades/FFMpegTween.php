@@ -11,6 +11,6 @@ class FFMpegTween extends Facade
 {
     protected static function getFacadeAccessor()
     {
-        return \ProjektGopher\FFMpegTween\FFMpegTween::class;
+        return \ProjektGopher\FFMpegTween\Tween::class;
     }
 }
