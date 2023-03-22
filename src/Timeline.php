@@ -17,6 +17,6 @@ class Timeline
 
     public function __toString()
     {
-        return 'timeline';
+        return 'timeline'.implode('', $this->keyframes);
     }
 }
