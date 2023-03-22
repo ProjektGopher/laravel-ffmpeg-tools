@@ -23,7 +23,8 @@ $x = (new Tween())
 ```
 
 The API is modelled after [The GreenSock Animation Platform (GSAP)](https://greensock.com/get-started/#whatIsGSAP)
-and all the math for the easings is ported from [Easings.net](https://easings.net.)
+and all the math for the easings is ported from [Easings.net](https://easings.net.).
+The stringification of these math strings is ported from [This Gitlab repo](https://gitlab.com/dak425/easing/-/blob/master/ffmpeg/ffmpeg.go)
 
 
 ## Installation
@@ -40,6 +41,7 @@ For now this package can only be used within a Laravel app, but there are plans 
 
 ## Usage
 
+Simple tween with delay and duration
 ```php
 use ProjektGopher\FFMpegTween\Tween;
 use ProjektGopher\FFMpegTween\Timing;
@@ -52,6 +54,35 @@ $x = (new Tween())
     ->duration(Timing::milliseconds(300))
     ->ease(Ease::OutSine);
 ```
+
+Animation seqence using keyframes
+> **warning** Not Implemented Yet.
+```php
+use ProjektGopher\FFMpegTween\Keyframe;
+use ProjektGopher\FFMpegTween\Timeline;
+use ProjektGopher\FFMpegTween\Timing;
+use ProjektGopher\FFMpegTween\Enums\Ease;
+
+$x = (new Timeline())
+    ->keyframe(
+        (new Keyframe)
+            ->value('-text_w') // The first keyframe should have **only** a value
+    )
+    ->keyframe(
+        (new Keyframe)
+            ->value('(main_w/2)-(text_w/2)') // center
+            ->duration(Timing::seconds(1))
+            ->ease(Ease::OutElastic)
+    )
+    ->keyframe(
+        (new Keyframe)
+            ->value('main_w')
+            ->delay(Timing::seconds(3))
+            ->duration(Timing::seconds(1))
+            ->ease(Ease::InBack)
+    );
+```
+> **Note** `delay` is relative to the previous `keyframe`.
 
 ## Testing
 
