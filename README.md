@@ -63,26 +63,23 @@ use ProjektGopher\FFMpegTween\Timeline;
 use ProjektGopher\FFMpegTween\Timing;
 use ProjektGopher\FFMpegTween\Enums\Ease;
 
-$x = (new Timeline())
-    ->keyframe(
-        (new Keyframe)
-            ->value('-text_w') // The first keyframe should have **only** a value
-    )
-    ->keyframe(
-        (new Keyframe)
-            ->value('(main_w/2)-(text_w/2)') // center
-            ->duration(Timing::seconds(1))
-            ->ease(Ease::OutElastic)
-    )
-    ->keyframe(
-        (new Keyframe)
-            ->value('main_w')
-            ->delay(Timing::seconds(3))
-            ->duration(Timing::seconds(1))
-            ->ease(Ease::InBack)
-    );
+$x = new Timeline()
+$x->keyframe((new Keyframe)
+    ->value('-text_w')
+    ->duration(Timing::seconds(0)) // maybe make this the default?
+);
+$x->keyframe((new Keyframe)
+    ->value('(main_w/2)-(text_w/2)') // center
+    ->duration(Timing::seconds(1))
+    ->ease(Ease::OutElastic)
+    ->hold(Timing::seconds(3))
+);
+$x->keyframe((new Keyframe)
+    ->value('main_w')
+    ->duration(Timing::seconds(1))
+    ->ease(Ease::InBack)
+);
 ```
-> **Note** `delay` is relative to the previous `keyframe`.
 
 ## Testing
 
