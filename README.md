@@ -55,8 +55,8 @@ $x = (new Tween())
     ->ease(Ease::OutSine);
 ```
 
-Animation seqence using keyframes
-> **warning** Not Implemented Yet.
+Animation seqences using keyframes
+> **Warning** Not Implemented Yet.
 ```php
 use ProjektGopher\FFMpegTween\Keyframe;
 use ProjektGopher\FFMpegTween\Timeline;
@@ -80,6 +80,7 @@ $x->keyframe((new Keyframe)
     ->ease(Ease::InBack)
 );
 ```
+> **Note** `new Timeline()` returns a _fluent_ api, meaning methods can be chained as well.
 
 ## Testing
 
