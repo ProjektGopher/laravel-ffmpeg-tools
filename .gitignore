@@ -7,3 +7,4 @@ phpunit.xml
 phpstan.neon
 testbench.yaml
 vendor
+tests/Snapshots/*.png
