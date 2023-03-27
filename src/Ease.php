@@ -158,7 +158,7 @@ class Ease
     {
         $c4 = (2 * M_PI) / 3;
 
-        return "if(eq(({$time})\\,0)\\,0\\,if(eq(({$time})\\,1)\\,1\\,-pow(2\\,10*({$time})-10)*sin(({$time})*10-10.75)*{$c4}))";
+        return "if(eq(({$time})\\,0)\\,0\\,if(eq(({$time})\\,1)\\,1\\,-pow(2\\,10*({$time})-10)*sin((({$time})*10-10.75)*{$c4})))";
     }
 
     public static function EaseOutElastic(string $time): string
