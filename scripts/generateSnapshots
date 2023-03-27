@@ -13,7 +13,7 @@ $time = "X/H";
 foreach (AvailableEasings::cases() as $ease) {
     echo "Generating snapshot for {$ease->value} easing...".PHP_EOL;
     $easeMultiplier = Ease::{$ease->value}($time);
-    
+
     $input = "-f lavfi -i \"color=c=black:s=256x256:d=1\"";
     $filter = "-vf \"geq=if(eq(round(H*({$easeMultiplier}))\,H-Y)\,128\,0):128:128\"";
     $out = "-frames:v 1 -update 1 tests/Snapshots/{$ease->value}.png";
