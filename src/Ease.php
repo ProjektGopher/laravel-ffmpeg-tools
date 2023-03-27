@@ -134,7 +134,7 @@ class Ease
         $c1 = 1.70158;
         $c3 = $c1 + 1;
 
-        return "{$c1}*pow(({$time})\\,3)-{$c3}*pow(({$time})\\,2)";
+        return "{$c3}*pow(({$time})\\,3)-{$c1}*pow(({$time})\\,2)";
     }
 
     public static function EaseOutBack(string $time): string
