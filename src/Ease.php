@@ -205,6 +205,6 @@ class Ease
         $gtExpr = "(1-({$x1}))/2";
         $ltExpr = "(1+({$x2}))/2";
 
-        return "if(lt(({$time})\\,0.5)\\,{$ltExpr}\\,{$gtExpr}";
+        return "if(lt(({$time})\\,0.5)\\,{$ltExpr}\\,{$gtExpr})";
     }
 }
