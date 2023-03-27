@@ -111,7 +111,8 @@ class Ease
         $firstExp = "pow(2\\,20*({$time})-10)/2";
         $secondExp = "(2-pow(2\\,-20*({$time})+10))/2";
 
-        return "if(eq(({$time})\\,0)\\,0\\,(if(eq(({$time})\\,1)\\,1\\,if(lt(({$time})\\,0.5)\\,pow(2\\,20*({$firstExp})-10)/2)\\,(2-pow(2\\,-20*({$secondExp})+10))/2)))";
+        // We have to set the return value for 0 and 1 explicitly as we lose accuracy at the 4th decimal place.
+        return "if(eq(({$time})\\,0)\\,0\\,if(eq(({$time})\\,1)\\,1\\,if(lt(({$time})\\,0.5)\\,{$firstExp}\\,{$secondExp})))";
     }
 
     public static function EaseInCirc(string $time): string
@@ -134,7 +135,7 @@ class Ease
         $c1 = 1.70158;
         $c3 = $c1 + 1;
 
-        return "{$c1}*pow(({$time})\\,3)-{$c3}*pow(({$time})\\,2)";
+        return "{$c3}*pow(({$time})\\,3)-{$c1}*pow(({$time})\\,2)";
     }
 
     public static function EaseOutBack(string $time): string
@@ -157,7 +158,7 @@ class Ease
     {
         $c4 = (2 * M_PI) / 3;
 
-        return "if(eq(({$time})\\,0)\\,0\\,if(eq(({$time})\\,1)\\,1\\,-pow(2\\,10*({$time})-10)*sin(({$time})*10-10.75)*{$c4}))";
+        return "if(eq(({$time})\\,0)\\,0\\,if(eq(({$time})\\,1)\\,1\\,-pow(2\\,10*({$time})-10)*sin((({$time})*10-10.75)*{$c4})))";
     }
 
     public static function EaseOutElastic(string $time): string
@@ -188,12 +189,12 @@ class Ease
         $n1 = 7.5625;
         $d1 = 2.75;
         $firstExpr = "{$n1}*pow(({$time})\\,2)";
-        $secondTime = "(({$time})-1.5)";
-        $secondExpr = "{$n1}*({$secondTime}/{$d1})*({$secondTime})+0.75";
-        $thirdTime = "(({$time})-2.25)";
-        $thirdExpr = "{$n1}*({$thirdTime}/{$d1})*({$thirdTime})+0.9375";
-        $fourthTime = "(({$time})-2.65)";
-        $fourthExpr = "{$n1}*({$fourthTime}/{$d1})*({$fourthTime})+0.984375";
+        $secondTime = "(({$time})-1.5/{$d1})";
+        $secondExpr = "{$n1}*{$secondTime}*{$secondTime}+0.75";
+        $thirdTime = "(({$time})-2.25/{$d1})";
+        $thirdExpr = "{$n1}*{$thirdTime}*{$thirdTime}+0.9375";
+        $fourthTime = "(({$time})-2.65/{$d1})";
+        $fourthExpr = "{$n1}*{$fourthTime}*{$fourthTime}+0.984375";
 
         return "if(lt(({$time})\\, 1/{$d1})\\,{$firstExpr}\\,if(lt(({$time})\\,2/{$d1})\\,{$secondExpr}\\,if(lt(({$time})\\,2.5/{$d1})\\,{$thirdExpr}\\,{$fourthExpr})))";
     }
@@ -202,9 +203,9 @@ class Ease
     {
         $x1 = self::EaseOutBounce("1-2*({$time})");
         $x2 = self::EaseOutBounce("2*({$time})-1");
-        $gtExpr = "(1-({$x1}))/2";
-        $ltExpr = "(1+({$x2}))/2";
+        $ltExpr = "(1-({$x1}))/2";
+        $gtExpr = "(1+({$x2}))/2";
 
-        return "if(lt(({$time})\\,0.5)\\,{$ltExpr}\\,{$gtExpr}";
+        return "if(lt(({$time})\\,0.5)\\,{$ltExpr}\\,{$gtExpr})";
     }
 }

@@ -59,6 +59,20 @@ $x = (new Tween())
 composer test
 ```
 
+### Visual Snapshot Testing
+To generate plots of all `Ease` methods, from the project root, run
+```bash
+./scripts/generateSnapshots
+```
+The 256x256 PNGs will be generated in the `tests/Snapshots` directory.
+These snapshots will be ignored by git, but allow visual inspection of the plots to
+compare against known good sources, like [Easings.net](https://easings.net).
+
+> **Note** The `scripts` directory _may_ need to have its permissions changed to allow script execution
+```bash
+chmod -R 777 ./scripts
+```
+
 ## Changelog
 
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
