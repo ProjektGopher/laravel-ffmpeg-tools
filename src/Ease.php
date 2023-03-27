@@ -188,12 +188,12 @@ class Ease
         $n1 = 7.5625;
         $d1 = 2.75;
         $firstExpr = "{$n1}*pow(({$time})\\,2)";
-        $secondTime = "(({$time})-1.5)";
-        $secondExpr = "{$n1}*({$secondTime}/{$d1})*({$secondTime})+0.75";
-        $thirdTime = "(({$time})-2.25)";
-        $thirdExpr = "{$n1}*({$thirdTime}/{$d1})*({$thirdTime})+0.9375";
-        $fourthTime = "(({$time})-2.65)";
-        $fourthExpr = "{$n1}*({$fourthTime}/{$d1})*({$fourthTime})+0.984375";
+        $secondTime = "(({$time})-1.5/{$d1})";
+        $secondExpr = "{$n1}*{$secondTime}*{$secondTime}+0.75";
+        $thirdTime = "(({$time})-2.25/{$d1})";
+        $thirdExpr = "{$n1}*{$thirdTime}*{$thirdTime}+0.9375";
+        $fourthTime = "(({$time})-2.65/{$d1})";
+        $fourthExpr = "{$n1}*{$fourthTime}*{$fourthTime}+0.984375";
 
         return "if(lt(({$time})\\, 1/{$d1})\\,{$firstExpr}\\,if(lt(({$time})\\,2/{$d1})\\,{$secondExpr}\\,if(lt(({$time})\\,2.5/{$d1})\\,{$thirdExpr}\\,{$fourthExpr})))";
     }
