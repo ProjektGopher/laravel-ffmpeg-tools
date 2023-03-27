@@ -202,8 +202,8 @@ class Ease
     {
         $x1 = self::EaseOutBounce("1-2*({$time})");
         $x2 = self::EaseOutBounce("2*({$time})-1");
-        $gtExpr = "(1-({$x1}))/2";
-        $ltExpr = "(1+({$x2}))/2";
+        $ltExpr = "(1-({$x1}))/2";
+        $gtExpr = "(1+({$x2}))/2";
 
         return "if(lt(({$time})\\,0.5)\\,{$ltExpr}\\,{$gtExpr})";
     }
