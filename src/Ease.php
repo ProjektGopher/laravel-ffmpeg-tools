@@ -111,8 +111,8 @@ class Ease
         $firstExp = "pow(2\\,20*({$time})-10)/2";
         $secondExp = "(2-pow(2\\,-20*({$time})+10))/2";
 
+        // We have to set the return value for 0 and 1 explicitly as we lose accuracy at the 4th decimal place.
         return "if(eq(({$time})\\,0)\\,0\\,if(eq(({$time})\\,1)\\,1\\,if(lt(({$time})\\,0.5)\\,{$firstExp}\\,{$secondExp})))";
-        // return "if(lt(({$time})\\,0.5)\\,{$firstExp}\\,{$secondExp})";
     }
 
     public static function EaseInCirc(string $time): string
