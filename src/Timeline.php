@@ -2,7 +2,6 @@
 
 namespace ProjektGopher\FFMpegTween;
 
-use ProjektGopher\FFMpegTween\Enums\Ease;
 use ProjektGopher\FFMpegTween\Keyframe;
 
 class Timeline
@@ -38,14 +37,8 @@ class Timeline
                 throw new \Exception('Keyframe is not of type Keyframe.');
             }
 
-            if ($index === 0) {
-                // $this->tweens[] = (new Tween())
-                //     ->from($keyframe->value)
-                //     ->to($keyframe->value)
-                //     ->duration(new Timing(0))
-                //     ->ease(Ease::Linear);
-            }
-            else {
+            // Skip the first keyframe, as the values will be baked into the next tween.
+            if ($index !== 0) {
                 $this->tweens[] = (new Tween())
                     ->from($this->getKeyframeByIndex($index - 1)->value)
                     ->to($keyframe->value)
