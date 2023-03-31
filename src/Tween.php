@@ -70,7 +70,7 @@ class Tween
      * Builds the tween string which can be used in an FFMpeg command.
      * This is called automatically at the end of the chain.
      */
-    public function __toString(): string
+    public function build(): string
     {
         if (! $this->ease) {
             $this->ease(AvailableEasings::Linear);
@@ -88,6 +88,11 @@ class Tween
         //   )
         // )
         return "if(lt(t\,{$this->delay})\,{$this->from}\,if(gt(t\,{$this->delay}+{$this->duration})\,{$this->to}\,{$this->from}+({$this->getDelta()}*{$this->ease})))";
+    }
+
+    public function __toString()
+    {
+        return $this->build();
     }
 
     public static function __callStatic($name, $arguments): self

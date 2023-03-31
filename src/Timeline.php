@@ -56,7 +56,7 @@ class Timeline
         return $this->keyframes[$index];
     }
 
-    public function __toString(): string
+    public function build(): string
     {
         if (count($this->tweens) === 0) {
             $this->buildTweens();
@@ -74,5 +74,10 @@ class Timeline
         }
 
         return $timeline;
+    }
+
+    public function __toString(): string
+    {
+        return $this->build();
     }
 }
