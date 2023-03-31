@@ -93,7 +93,7 @@ To generate plots of all `Ease` methods, from the project root, run
 ```bash
 ./scripts/generateEasings
 ```
-The 256x256 PNGs will be generated in the `tests/Snapshots` directory.
+The 256x256 PNGs will be generated in the `tests/Snapshots/Easings` directory.
 These snapshots will be ignored by git, but allow visual inspection of the plots to
 compare against known good sources, like [Easings.net](https://easings.net).
 
