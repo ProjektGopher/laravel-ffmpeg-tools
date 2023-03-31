@@ -91,7 +91,7 @@ composer test
 ### Visual Snapshot Testing
 To generate plots of all `Ease` methods, from the project root, run
 ```bash
-./scripts/generateSnapshots
+./scripts/generateEasings
 ```
 The 256x256 PNGs will be generated in the `tests/Snapshots` directory.
 These snapshots will be ignored by git, but allow visual inspection of the plots to
