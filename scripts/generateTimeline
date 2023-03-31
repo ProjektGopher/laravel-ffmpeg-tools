@@ -31,7 +31,7 @@ $input = "-f lavfi -i \"color=c=black:s=256x256:d=1\"";
 $filter = "-filter_complex \"[0:v] loop=-1:1 [bg]; [bg] drawtext=text='Timeline':fontcolor=white:x=(main_w/2)-(tw/2):y={$timeline}\"";
 $codecs = '-codec:a copy -codec:v libx264 -crf 25 -pix_fmt yuv420p';
 $duration = '-t 8'; // in seconds
-$out = "tests/Snapshots/_Timeline.mp4";
+$out = "tests/Snapshots/Timelines/drawtext_y_enter-OutBounce_exit-InElastic.mp4";
 $redirect = '2>&1'; // redirect stderr to stdout
 
 $cmd = "ffmpeg -y {$input} {$filter} {$codecs} {$duration} {$out} {$redirect}";
