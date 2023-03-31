@@ -55,8 +55,7 @@ $x = (new Tween())
     ->ease(Ease::OutSine);
 ```
 
-Animation seqences using keyframes
-> **Warning** Not Implemented Yet.
+Animation sequences using keyframes
 ```php
 use ProjektGopher\FFMpegTween\Keyframe;
 use ProjektGopher\FFMpegTween\Timeline;
@@ -65,19 +64,19 @@ use ProjektGopher\FFMpegTween\Enums\Ease;
 
 $x = new Timeline()
 $x->keyframe((new Keyframe)
-    ->value('-text_w')
-    ->duration(Timing::seconds(0)) // maybe make this the default?
+    ->value('-text_w') // outside left of frame
+    ->hold(Timing::seconds(1))
 );
 $x->keyframe((new Keyframe)
     ->value('(main_w/2)-(text_w/2)') // center
-    ->duration(Timing::seconds(1))
     ->ease(Ease::OutElastic)
+    ->duration(Timing::seconds(1))
     ->hold(Timing::seconds(3))
 );
 $x->keyframe((new Keyframe)
-    ->value('main_w')
-    ->duration(Timing::seconds(1))
+    ->value('main_w') // outside right of frame
     ->ease(Ease::InBack)
+    ->duration(Timing::seconds(1))
 );
 ```
 > **Note** `new Timeline()` returns a _fluent_ api, meaning methods can be chained as well.
@@ -96,6 +95,14 @@ To generate plots of all `Ease` methods, from the project root, run
 The 256x256 PNGs will be generated in the `tests/Snapshots/Easings` directory.
 These snapshots will be ignored by git, but allow visual inspection of the plots to
 compare against known good sources, like [Easings.net](https://easings.net).
+
+To generate a video using a `Timeline` with `Keyframes`, from the project root, run
+```bash
+./scripts/generateTimeline
+```
+The 256x256 MP4 will be generated in the `tests/Snapshots/Timelines` directory.
+These snapshots will also be ignored by git, but again allow for a visual
+inspection to ensure they match the expected output.
 
 > **Note** The `scripts` directory _may_ need to have its permissions changed to allow script execution
 ```bash
