@@ -90,7 +90,7 @@ class Tween
         return "if(lt(t\,{$this->delay})\,{$this->from}\,if(gt(t\,{$this->delay}+{$this->duration})\,{$this->to}\,{$this->from}+({$this->getDelta()}*{$this->ease})))";
     }
 
-    public function __toString()
+    public function __toString(): string
     {
         return $this->build();
     }
