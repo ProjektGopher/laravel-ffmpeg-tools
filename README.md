@@ -23,7 +23,7 @@ $x = (new Tween())
 ```
 
 The API is modelled after [The GreenSock Animation Platform (GSAP)](https://greensock.com/get-started/#whatIsGSAP)
-and all the math for the easings is ported from [Easings.net](https://easings.net.).
+and all the math for the easings is ported from [Easings.net](https://easings.net).
 The stringification of these math strings is ported from [This Gitlab repo](https://gitlab.com/dak425/easing/-/blob/master/ffmpeg/ffmpeg.go)
 
 
