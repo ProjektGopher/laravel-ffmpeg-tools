@@ -44,6 +44,11 @@ class Tween
         return $this;
     }
 
+    public function getDelay(): string
+    {
+        return $this->delay;
+    }
+
     public function ease(AvailableEasings $ease): self
     {
         $easeString = Ease::{$ease->value}("(t-{$this->delay})/{$this->duration}");

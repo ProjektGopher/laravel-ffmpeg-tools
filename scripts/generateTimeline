@@ -1,0 +1,55 @@
+#!/usr/bin/env php
+<?php
+
+require_once __DIR__.'/../vendor/autoload.php';
+
+use ProjektGopher\FFMpegTween\Timeline;
+use ProjektGopher\FFMpegTween\Keyframe;
+use ProjektGopher\FFMpegTween\Enums\Ease;
+use ProjektGopher\FFMpegTween\Timing;
+
+echo 'Generating video sample using Timeline...'.PHP_EOL;
+
+$timeline = new Timeline();
+$timeline->keyframe((new Keyframe())
+    ->value('-th')
+    ->hold(Timing::seconds(1))
+);
+$timeline->keyframe((new Keyframe())
+    ->value('(main_h/2)-(th/2)')
+    ->ease(Ease::OutBounce)
+    ->duration(Timing::seconds(2))
+    ->hold(Timing::seconds(1))
+);
+$timeline->keyframe((new Keyframe())
+    ->value('main_h')
+    ->ease(Ease::InElastic)
+    ->duration(Timing::seconds(2))
+);
+
+$input = "-f lavfi -i \"color=c=black:s=256x256:d=1\"";
+$filter = "-filter_complex \"[0:v] loop=-1:1 [bg]; [bg] drawtext=text='Timeline':fontcolor=white:x=(main_w/2)-(tw/2):y={$timeline}\"";
+$codecs = '-codec:a copy -codec:v libx264 -crf 25 -pix_fmt yuv420p';
+$duration = '-t 8'; // in seconds
+$out = "tests/Snapshots/Timelines/drawtext_y_enter-OutBounce_exit-InElastic.mp4";
+$redirect = '2>&1'; // redirect stderr to stdout
+
+$cmd = "ffmpeg -y {$input} {$filter} {$codecs} {$duration} {$out} {$redirect}";
+
+// TEMPORARY
+dump($timeline);
+echo $cmd;
+// die();
+
+(array) $output = [];
+(int) $code = 0;
+exec($cmd, $output, $code);
+
+if ($code !== 0) {
+    echo PHP_EOL;
+    echo "Failed to generate snapshot for Timeline class.".PHP_EOL;
+    echo "Command: {$cmd}".PHP_EOL;
+    echo "Output: ".PHP_EOL;
+    echo implode(PHP_EOL, $output).PHP_EOL;
+    exit(1);
+}

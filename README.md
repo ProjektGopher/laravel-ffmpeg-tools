@@ -23,7 +23,8 @@ $x = (new Tween())
 ```
 
 The API is modelled after [The GreenSock Animation Platform (GSAP)](https://greensock.com/get-started/#whatIsGSAP)
-and all the math for the easings is ported from [Easings.net](https://easings.net.)
+and all the math for the easings is ported from [Easings.net](https://easings.net).
+The stringification of these math strings is ported from [This Gitlab repo](https://gitlab.com/dak425/easing/-/blob/master/ffmpeg/ffmpeg.go)
 
 
 ## Installation
@@ -40,6 +41,7 @@ For now this package can only be used within a Laravel app, but there are plans 
 
 ## Usage
 
+Simple tween with delay and duration
 ```php
 use ProjektGopher\FFMpegTween\Tween;
 use ProjektGopher\FFMpegTween\Timing;
@@ -53,6 +55,32 @@ $x = (new Tween())
     ->ease(Ease::OutSine);
 ```
 
+Animation sequences using keyframes
+```php
+use ProjektGopher\FFMpegTween\Keyframe;
+use ProjektGopher\FFMpegTween\Timeline;
+use ProjektGopher\FFMpegTween\Timing;
+use ProjektGopher\FFMpegTween\Enums\Ease;
+
+$x = new Timeline()
+$x->keyframe((new Keyframe)
+    ->value('-text_w') // outside left of frame
+    ->hold(Timing::seconds(1))
+);
+$x->keyframe((new Keyframe)
+    ->value('(main_w/2)-(text_w/2)') // center
+    ->ease(Ease::OutElastic)
+    ->duration(Timing::seconds(1))
+    ->hold(Timing::seconds(3))
+);
+$x->keyframe((new Keyframe)
+    ->value('main_w') // outside right of frame
+    ->ease(Ease::InBack)
+    ->duration(Timing::seconds(1))
+);
+```
+> **Note** `new Timeline()` returns a _fluent_ api, meaning methods can be chained as well.
+
 ## Testing
 
 ```bash
@@ -62,11 +90,19 @@ composer test
 ### Visual Snapshot Testing
 To generate plots of all `Ease` methods, from the project root, run
 ```bash
-./scripts/generateSnapshots
+./scripts/generateEasings
 ```
-The 256x256 PNGs will be generated in the `tests/Snapshots` directory.
+The 256x256 PNGs will be generated in the `tests/Snapshots/Easings` directory.
 These snapshots will be ignored by git, but allow visual inspection of the plots to
 compare against known good sources, like [Easings.net](https://easings.net).
+
+To generate a video using a `Timeline` with `Keyframes`, from the project root, run
+```bash
+./scripts/generateTimeline
+```
+The 256x256 MP4 will be generated in the `tests/Snapshots/Timelines` directory.
+These snapshots will also be ignored by git, but again allow for a visual
+inspection to ensure they match the expected output.
 
 > **Note** The `scripts` directory _may_ need to have its permissions changed to allow script execution
 ```bash
