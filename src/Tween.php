@@ -16,14 +16,14 @@ class Tween
 
     protected string $ease;
 
-    public function from($from): self
+    public function from(string $from): self
     {
         $this->from = "({$from})";
 
         return $this;
     }
 
-    public function to($to): self
+    public function to(string $to): self
     {
         $this->to = "({$to})";
 
@@ -95,7 +95,7 @@ class Tween
         return $this->build();
     }
 
-    public static function __callStatic($name, $arguments): self
+    public static function __callStatic(string $name, array $arguments): self
     {
         return (new self)->$name(...$arguments);
     }
