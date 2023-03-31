@@ -1,7 +1,7 @@
 # Generate FFMpeg easing and tweening strings in Laravel.
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/projektgopher/laravel-ffmpeg-tween.svg?style=flat-square)](https://packagist.org/packages/projektgopher/laravel-ffmpeg-tween)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/projektgopher/laravel-ffmpeg-tween/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/projektgopher/laravel-ffmpeg-tween/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/projektgopher/laravel-ffmpeg-tween/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/projektgopher/laravel-ffmpeg-tween/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/projektgopher/laravel-ffmpeg-tween/phpstan.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/projektgopher/laravel-ffmpeg-tween/actions?query=workflow%3A"phpstan"+branch%3Amain)
 [![Total Downloads](https://img.shields.io/packagist/dt/projektgopher/laravel-ffmpeg-tween.svg?style=flat-square)](https://packagist.org/packages/projektgopher/laravel-ffmpeg-tween)
 
 FFMpeg can be opaque in its commands. Take the following example:
