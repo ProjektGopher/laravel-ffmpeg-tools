@@ -2,6 +2,8 @@
 
 namespace ProjektGopher\FFMpegTween;
 
+use ProjektGopher\FFMpegTween\Enums\Ease;
+
 class Timeline
 {
     private array $keyframes = [];
@@ -42,8 +44,8 @@ class Timeline
                     ->from($this->getKeyframeByIndex($index - 1)->value)
                     ->to($keyframe->value)
                     ->delay(Timing::seconds($current_time))
-                    ->duration($keyframe->duration)
-                    ->ease($keyframe->ease);
+                    ->duration($keyframe->duration ?? Timing::seconds(0))
+                    ->ease($keyframe->ease ?? Ease::Linear);
             }
 
             $current_time += $keyframe->hold?->seconds;
