@@ -1,5 +1,4 @@
 # Generate FFMpeg easing and tweening strings in Laravel.
-
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/projektgopher/laravel-ffmpeg-tween.svg?style=flat-square)](https://packagist.org/packages/projektgopher/laravel-ffmpeg-tween)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/projektgopher/laravel-ffmpeg-tween/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/projektgopher/laravel-ffmpeg-tween/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/projektgopher/laravel-ffmpeg-tween/fix-php-code-style-issues.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/projektgopher/laravel-ffmpeg-tween/actions?query=workflow%3A"Fix+PHP+code+style+issues"+branch%3Amain)
@@ -26,22 +25,17 @@ The API is modelled after [The GreenSock Animation Platform (GSAP)](https://gree
 and all the math for the easings is ported from [Easings.net](https://easings.net).
 The stringification of these math strings is ported from [This Gitlab repo](https://gitlab.com/dak425/easing/-/blob/master/ffmpeg/ffmpeg.go)
 
-
 ## Installation
-
 You can install the package via composer:
-
 ```bash
 composer require projektgopher/laravel-ffmpeg-tween
 ```
 
-### Using outside of a Laravel application
-
-For now this package can only be used within a Laravel app, but there are plans to extract the core functionality out into a separate package that can be used without being bound to the framework.
-
 ## Usage
+### Using outside of a Laravel application
+For now this package can only be used within a Laravel app, but there are plans to extract the core functionality into a separate package that can be used without being bound to the framework.
 
-Simple tween with delay and duration
+### Simple tween with delay and duration
 ```php
 use ProjektGopher\FFMpegTween\Tween;
 use ProjektGopher\FFMpegTween\Timing;
@@ -55,7 +49,7 @@ $x = (new Tween())
     ->ease(Ease::OutSine);
 ```
 
-Animation sequences using keyframes
+### Animation sequences using keyframes
 ```php
 use ProjektGopher\FFMpegTween\Keyframe;
 use ProjektGopher\FFMpegTween\Timeline;
@@ -79,15 +73,16 @@ $x->keyframe((new Keyframe)
     ->duration(Timing::seconds(1))
 );
 ```
+
 > **Note** `new Timeline()` returns a _fluent_ api, meaning methods can be chained as well.
 
 ## Testing
-
 ```bash
 composer test
 ```
 
 ### Visual Snapshot Testing
+#### Easing
 To generate plots of all `Ease` methods, from the project root, run
 ```bash
 ./scripts/generateEasings
@@ -96,6 +91,7 @@ The 256x256 PNGs will be generated in the `tests/Snapshots/Easings` directory.
 These snapshots will be ignored by git, but allow visual inspection of the plots to
 compare against known good sources, like [Easings.net](https://easings.net).
 
+#### Timelines
 To generate a video using a `Timeline` with `Keyframes`, from the project root, run
 ```bash
 ./scripts/generateTimeline
@@ -110,22 +106,17 @@ chmod -R 777 ./scripts
 ```
 
 ## Changelog
-
 Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
 
 ## Contributing
-
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 
 ## Security Vulnerabilities
-
 Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
 ## Credits
-
 - [Len Woodward](https://github.com/ProjektGopher)
 - [All Contributors](../../contributors)
 
 ## License
-
 The MIT License (MIT). Please see [License File](LICENSE.md) for more information.
