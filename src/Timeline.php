@@ -2,11 +2,10 @@
 
 namespace ProjektGopher\FFMpegTween;
 
-use ProjektGopher\FFMpegTween\Keyframe;
-
 class Timeline
 {
     private array $keyframes = [];
+
     private array $tweens = [];
 
     public function keyframe(Keyframe $keyframe): self

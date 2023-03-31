@@ -1,5 +1,5 @@
 <?php
 
 test('happy path', function () {
-  expect(true)->toBeTrue();
+    expect(true)->toBeTrue();
 });

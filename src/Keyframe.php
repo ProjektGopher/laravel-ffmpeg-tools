@@ -7,8 +7,11 @@ use ProjektGopher\FFMpegTween\Enums\Ease;
 class Keyframe
 {
     public string $value;
+
     public ?Ease $ease = null;
+
     public ?Timing $duration = null;
+
     public ?Timing $hold = null;
 
     public function value(string $value): self
