@@ -2,6 +2,8 @@
 
 namespace ProjektGopher\FFMpegTween;
 
+use ProjektGopher\FFMpegTween\Utils\Expr;
+
 /**
  * Ease
  *
@@ -14,7 +16,7 @@ namespace ProjektGopher\FFMpegTween;
  * progress of the animation in the bounds of 0 (beginning of the animation)
  * and 1 (end of animation).
  */
-class Ease
+class EaseFunctions
 {
     public static function Linear(string $time): string
     {
@@ -151,7 +153,11 @@ class Ease
         $c1 = 1.70158;
         $c2 = $c1 * 1.525;
 
-        return "if(lt(({$time})\\,0.5)\\,(pow(2*({$time})\\,2)*(({$c2}+1)*2*({$time})-{$c2}))/2\\,(pow(2*({$time})-2\\,2)*(({$c2}+1)*(({$time})*2-2)+{$c2})+2)/2)";
+        return Expr::if(
+            Expr::lt($time, '0.5'),
+            "(pow(2*({$time})\\,2)*(({$c2}+1)*2*({$time})-{$c2}))/2",
+            "(pow(2*({$time})-2\\,2)*(({$c2}+1)*(({$time})*2-2)+{$c2})+2)/2",
+        );
     }
 
     public static function EaseInElastic(string $time): string
@@ -171,10 +177,20 @@ class Ease
     public static function EaseInOutElastic(string $time): string
     {
         $c5 = (2 * M_PI) / 4.5;
-        $ltExpr = "-(pow(2\\,20*({$time})-10)*sin((20*({$time})-11.125)*{$c5}))/2";
-        $gtExpr = "(pow(2\\,-20*({$time})+10)*sin((20*({$time})-11.125)*{$c5}))/2+1";
 
-        return "if(eq(({$time})\\,0)\\,0\\,if(eq(({$time})\\,1)\\,1\\,if(lt(({$time})\\,0.5)\\,{$ltExpr}\\,{$gtExpr})))";
+        return Expr::if(
+            x: Expr::eq($time, '0'),
+            y: '0',
+            z: Expr::if(
+                x: Expr::eq($time, '1'),
+                y: '1',
+                z: Expr::if(
+                    x: Expr::lt($time, '0.5'),
+                    y: "-(pow(2\\,20*({$time})-10)*sin((20*({$time})-11.125)*{$c5}))/2",
+                    z: "(pow(2\\,-20*({$time})+10)*sin((20*({$time})-11.125)*{$c5}))/2+1",
+                ),
+            ),
+        );
     }
 
     public static function EaseInBounce(string $time): string
@@ -188,15 +204,23 @@ class Ease
     {
         $n1 = 7.5625;
         $d1 = 2.75;
-        $firstExpr = "{$n1}*pow(({$time})\\,2)";
-        $secondTime = "(({$time})-1.5/{$d1})";
-        $secondExpr = "{$n1}*{$secondTime}*{$secondTime}+0.75";
-        $thirdTime = "(({$time})-2.25/{$d1})";
-        $thirdExpr = "{$n1}*{$thirdTime}*{$thirdTime}+0.9375";
-        $fourthTime = "(({$time})-2.65/{$d1})";
-        $fourthExpr = "{$n1}*{$fourthTime}*{$fourthTime}+0.984375";
+        $time2 = "(({$time})-1.5/{$d1})";
+        $time3 = "(({$time})-2.25/{$d1})";
+        $time4 = "(({$time})-2.65/{$d1})";
 
-        return "if(lt(({$time})\\, 1/{$d1})\\,{$firstExpr}\\,if(lt(({$time})\\,2/{$d1})\\,{$secondExpr}\\,if(lt(({$time})\\,2.5/{$d1})\\,{$thirdExpr}\\,{$fourthExpr})))";
+        return Expr::if(
+            x: Expr::lt($time, "1/{$d1}"),
+            y: "{$n1}*pow(({$time})\\,2)",
+            z: Expr::if(
+                x: Expr::lt($time, "2/{$d1}"),
+                y: "{$n1}*{$time2}*{$time2}+0.75",
+                z: Expr::if(
+                    x: Expr::lt($time, "2.5/{$d1}"),
+                    y: "{$n1}*{$time3}*{$time3}+0.9375",
+                    z: "{$n1}*{$time4}*{$time4}+0.984375",
+                ),
+            ),
+        );
     }
 
     public static function EaseInOutBounce(string $time): string
