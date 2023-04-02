@@ -75,19 +75,13 @@ class Tween
             $this->ease(Ease::Linear);
         }
 
-        // if t is less than delay, from
-        // else if t is greater than delay + duration, to
-        //      else, from + delta*ease
-
-        // return "if(lt(t\,{$this->delay})\,{$this->from}\,if(gt(t\,{$this->delay}+{$this->duration})\,{$this->to}\,{$this->from}+({$this->getDelta()}*{$this->ease})))";
-
         return Expr::if(
-            Expr::lt('t', $this->delay),
-            $this->from,
-            Expr::if(
-                Expr::gt('t', "{$this->delay}+{$this->duration}"),
-                $this->to,
-                "{$this->from}+({$this->getDelta()}*{$this->ease})"
+            x: Expr::lt('t', $this->delay),
+            y: $this->from,
+            z: Expr::if(
+                x: Expr::gt('t', "{$this->delay}+{$this->duration}"),
+                y: $this->to,
+                z: "{$this->from}+({$this->getDelta()}*{$this->ease})"
             ),
         );
     }
