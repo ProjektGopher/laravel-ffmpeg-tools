@@ -2,7 +2,7 @@
 
 namespace ProjektGopher\FFMpegTween;
 
-use ProjektGopher\FFMpegTween\Enums\Ease as AvailableEasings;
+use ProjektGopher\FFMpegTween\Utils\Expr;
 
 class Tween
 {
@@ -49,10 +49,9 @@ class Tween
         return $this->delay;
     }
 
-    public function ease(AvailableEasings $ease): self
+    public function ease(Ease $ease): self
     {
-        $easeString = Ease::{$ease->value}("(t-{$this->delay})/{$this->duration}");
-        $this->ease = "({$easeString})";
+        $this->ease = $ease->make("(t-{$this->delay})/{$this->duration}");
 
         return $this;
     }
@@ -73,21 +72,24 @@ class Tween
     public function build(): string
     {
         if (! $this->ease) {
-            $this->ease(AvailableEasings::Linear);
+            $this->ease(Ease::Linear);
         }
 
         // if t is less than delay, from
         // else if t is greater than delay + duration, to
         //      else, from + delta*ease
 
-        // if( lt(t,{$this->delay}),
-        //   {$this->from},
-        //   if( gt(t,{$this->delay}+{$this->duration}),
-        //     {$this->to},
-        //     {$this->from}+({$this->getDelta()}*{$this->ease})
-        //   )
-        // )
-        return "if(lt(t\,{$this->delay})\,{$this->from}\,if(gt(t\,{$this->delay}+{$this->duration})\,{$this->to}\,{$this->from}+({$this->getDelta()}*{$this->ease})))";
+        // return "if(lt(t\,{$this->delay})\,{$this->from}\,if(gt(t\,{$this->delay}+{$this->duration})\,{$this->to}\,{$this->from}+({$this->getDelta()}*{$this->ease})))";
+
+        return Expr::if(
+            Expr::lt('t', $this->delay),
+            $this->from,
+            Expr::if(
+                Expr::gt('t', "{$this->delay}+{$this->duration}"),
+                $this->to,
+                "{$this->from}+({$this->getDelta()}*{$this->ease})"
+            ),
+        );
     }
 
     public function __toString(): string
