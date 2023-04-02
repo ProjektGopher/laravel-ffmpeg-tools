@@ -50,7 +50,11 @@ class EaseFunctions
 
     public static function EaseInOutQuad(string $time): string
     {
-        return "if(lt(({$time})\\,0.5)\\,2*pow(({$time})\\,2)\\,1-pow(-2*({$time})+2\\,2)/2)";
+        return Expr::if(
+            x: Expr::lt($time, '0.5'),
+            y: "2*pow(({$time})\\,2)",
+            z: "1-pow(-2*({$time})+2\\,2)/2",
+        );
     }
 
     public static function EaseInCubic(string $time): string
@@ -65,7 +69,11 @@ class EaseFunctions
 
     public static function EaseInOutCubic(string $time): string
     {
-        return "if(lt(({$time})\\,0.5)\\,4*pow(({$time})\\,3)\\,1-pow(-2*({$time})+2\\,3)/2)";
+        return Expr::if(
+            x: Expr::lt($time, '0.5'),
+            y: "4*pow(({$time})\\,3)",
+            z: "1-pow(-2*({$time})+2\\,3)/2",
+        );
     }
 
     public static function EaseInQuart(string $time): string
@@ -80,7 +88,11 @@ class EaseFunctions
 
     public static function EaseInOutQuart(string $time): string
     {
-        return "if(lt(({$time})\\,0.5)\\,8*pow(({$time})\\,4)\\,1-pow(-2*({$time})+2\\,4)/2)";
+        return Expr::if(
+            x: Expr::lt($time, '0.5'),
+            y: "8*pow(({$time})\\,4)",
+            z: "1-pow(-2*({$time})+2\\,4)/2",
+        );
     }
 
     public static function EaseInQuint(string $time): string
@@ -95,26 +107,46 @@ class EaseFunctions
 
     public static function EaseInOutQuint(string $time): string
     {
-        return "if(lt(({$time})\\,0.5)\\,16*pow(({$time})\\,5)\\,1-pow(-2*({$time})+2\\,5)/2)";
+        return Expr::if(
+            x: Expr::lt($time, '0.5'),
+            y: "16*pow(({$time})\\,5)",
+            z: "1-pow(-2*({$time})+2\\,5)/2",
+        );
     }
 
     public static function EaseInExpo(string $time): string
     {
-        return "if(eq(({$time})\\,0)\\,0\\,pow(2\\,10*({$time})-10))";
+        return Expr::if(
+            x: Expr::eq($time, '0'),
+            y: '0',
+            z: "pow(2\\,10*({$time})-10)",
+        );
     }
 
     public static function EaseOutExpo(string $time): string
     {
-        return "if(eq(({$time})\\,1)\\,1\\,1-pow(2\\,-10*({$time})))";
+        return Expr::if(
+            x: Expr::eq($time, '1'),
+            y: '1',
+            z: "1-pow(2\\,-10*({$time}))",
+        );
     }
 
     public static function EaseInOutExpo(string $time): string
     {
-        $firstExp = "pow(2\\,20*({$time})-10)/2";
-        $secondExp = "(2-pow(2\\,-20*({$time})+10))/2";
-
-        // We have to set the return value for 0 and 1 explicitly as we lose accuracy at the 4th decimal place.
-        return "if(eq(({$time})\\,0)\\,0\\,if(eq(({$time})\\,1)\\,1\\,if(lt(({$time})\\,0.5)\\,{$firstExp}\\,{$secondExp})))";
+        return Expr::if(
+            x: Expr::eq($time, '0'),
+            y: '0',
+            z: Expr::if(
+                x: Expr::eq($time, '1'),
+                y: '1',
+                z: Expr::if(
+                    x: Expr::lt($time, '0.5'),
+                    y: "pow(2\\,20*({$time})-10)/2",
+                    z: "(2-pow(2\\,-20*({$time})+10))/2",
+                ),
+            ),
+        );
     }
 
     public static function EaseInCirc(string $time): string
@@ -129,7 +161,11 @@ class EaseFunctions
 
     public static function EaseInOutCirc(string $time): string
     {
-        return "if(lt(({$time})\\,0.5)\\,(1-sqrt(1-pow(2*({$time})\\,2)))/2\\,(sqrt(1-pow(-2*({$time})+2\\,2))+1)/2)";
+        return Expr::if(
+            x: Expr::lt($time, '0.5'),
+            y: "(1-sqrt(1-pow(2*({$time})\\,2)))/2",
+            z: "(sqrt(1-pow(-2*({$time})+2\\,2))+1)/2",
+        );
     }
 
     public static function EaseInBack(string $time): string
@@ -154,9 +190,9 @@ class EaseFunctions
         $c2 = $c1 * 1.525;
 
         return Expr::if(
-            Expr::lt($time, '0.5'),
-            "(pow(2*({$time})\\,2)*(({$c2}+1)*2*({$time})-{$c2}))/2",
-            "(pow(2*({$time})-2\\,2)*(({$c2}+1)*(({$time})*2-2)+{$c2})+2)/2",
+            x: Expr::lt($time, '0.5'),
+            y: "(pow(2*({$time})\\,2)*(({$c2}+1)*2*({$time})-{$c2}))/2",
+            z: "(pow(2*({$time})-2\\,2)*(({$c2}+1)*(({$time})*2-2)+{$c2})+2)/2",
         );
     }
 
@@ -164,14 +200,30 @@ class EaseFunctions
     {
         $c4 = (2 * M_PI) / 3;
 
-        return "if(eq(({$time})\\,0)\\,0\\,if(eq(({$time})\\,1)\\,1\\,-pow(2\\,10*({$time})-10)*sin((({$time})*10-10.75)*{$c4})))";
+        return Expr::if(
+            x: Expr::eq($time, '0'),
+            y: '0',
+            z: Expr::if(
+                x: Expr::eq($time, '1'),
+                y: '1',
+                z: "-pow(2\\,10*({$time})-10)*sin((({$time})*10-10.75)*{$c4})",
+            ),
+        );
     }
 
     public static function EaseOutElastic(string $time): string
     {
         $c4 = (2 * M_PI) / 3;
 
-        return "if(eq(({$time})\\,0)\\,0\\,if(eq(({$time})\\,1)\\,1\\,pow(2\\,-10*({$time}))*sin((({$time})*10-0.75)*{$c4})+1))";
+        return Expr::if(
+            x: Expr::eq($time, '0'),
+            y: '0',
+            z: Expr::if(
+                x: Expr::eq($time, '1'),
+                y: '1',
+                z: "pow(2\\,-10*({$time}))*sin((({$time})*10-0.75)*{$c4})+1",
+            ),
+        );
     }
 
     public static function EaseInOutElastic(string $time): string
@@ -227,9 +279,11 @@ class EaseFunctions
     {
         $x1 = self::EaseOutBounce("1-2*({$time})");
         $x2 = self::EaseOutBounce("2*({$time})-1");
-        $ltExpr = "(1-({$x1}))/2";
-        $gtExpr = "(1+({$x2}))/2";
 
-        return "if(lt(({$time})\\,0.5)\\,{$ltExpr}\\,{$gtExpr})";
+        return Expr::if(
+            x: Expr::lt($time, '0.5'),
+            y: "(1-({$x1}))/2",
+            z: "(1+({$x2}))/2",
+        );
     }
 }
