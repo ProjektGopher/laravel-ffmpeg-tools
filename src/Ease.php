@@ -1,6 +1,6 @@
 <?php
 
-namespace ProjektGopher\FFMpegTween\Enums;
+namespace ProjektGopher\FFMpegTween;
 
 enum Ease: string
 {
@@ -35,4 +35,15 @@ enum Ease: string
     case InBounce = 'EaseInBounce';
     case OutBounce = 'EaseOutBounce';
     case InOutBounce = 'EaseInOutBounce';
+
+    public function make(string $time): string
+    {
+        // Wrap the result in parentheses to ensure that it
+        // doesn't interfere with surrounding expressions
+        return implode([
+            '(',
+            EaseFunctions::{$this->value}($time),
+            ')',
+        ]);
+    }
 }
