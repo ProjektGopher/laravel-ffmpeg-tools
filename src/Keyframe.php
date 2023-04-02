@@ -2,8 +2,6 @@
 
 namespace ProjektGopher\FFMpegTween;
 
-use ProjektGopher\FFMpegTween\Enums\Ease;
-
 class Keyframe
 {
     public string $value;
