@@ -5,7 +5,7 @@ require_once __DIR__.'/../vendor/autoload.php';
 
 use ProjektGopher\FFMpegTween\Timeline;
 use ProjektGopher\FFMpegTween\Keyframe;
-use ProjektGopher\FFMpegTween\Enums\Ease;
+use ProjektGopher\FFMpegTween\Ease;
 use ProjektGopher\FFMpegTween\Timing;
 
 echo 'Generating video sample using Timeline...'.PHP_EOL;
