@@ -137,6 +137,8 @@ Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
 Please review [our security policy](../../security/policy) on how to report security vulnerabilities.
 
 ## Credits
+A **big** "Thank You" to [EXACTsports](https://github.com/EXACTsports) for supporting the development of this package.
+
 - [Len Woodward](https://github.com/ProjektGopher)
 - [All Contributors](../../contributors)
 
