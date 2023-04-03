@@ -3,16 +3,15 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-use ProjektGopher\FFMpegTween\Enums\Ease as AvailableEasings;
 use ProjektGopher\FFMpegTween\Ease;
 
 echo 'starting... (fail fast)'.PHP_EOL;
 
 $time = "X/H";
 
-foreach (AvailableEasings::cases() as $ease) {
+foreach (Ease::cases() as $ease) {
     echo "Generating snapshot for {$ease->value} easing...".PHP_EOL;
-    $easeMultiplier = Ease::{$ease->value}($time);
+    $easeMultiplier = $ease->make($time);
 
     $input = "-f lavfi -i \"color=c=black:s=256x256:d=1\"";
     $margin = '28';

@@ -39,7 +39,7 @@ For now this package can only be used within a Laravel app, but there are plans 
 ```php
 use ProjektGopher\FFMpegTween\Tween;
 use ProjektGopher\FFMpegTween\Timing;
-use ProjektGopher\FFMpegTween\Enums\Ease;
+use ProjektGopher\FFMpegTween\Ease;
 
 $x = (new Tween())
     ->from("50")
@@ -54,7 +54,7 @@ $x = (new Tween())
 use ProjektGopher\FFMpegTween\Keyframe;
 use ProjektGopher\FFMpegTween\Timeline;
 use ProjektGopher\FFMpegTween\Timing;
-use ProjektGopher\FFMpegTween\Enums\Ease;
+use ProjektGopher\FFMpegTween\Ease;
 
 $x = new Timeline()
 $x->keyframe((new Keyframe)
