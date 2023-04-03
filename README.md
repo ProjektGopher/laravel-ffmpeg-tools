@@ -76,6 +76,28 @@ $x->keyframe((new Keyframe)
 
 > **Note** `new Timeline()` returns a _fluent_ api, meaning methods can be chained as well.
 
+## Expression Helpers
+When writing _long_ and **complicated** evaluated expressions, it can be easy to lose track of extra/missing perentheses, missing parameters, or unescaped commas. Especially when the whole expression _has_ to be on one line without any linebreaks or whitespace.
+
+The `Expr` class can help with this. If your expression is short enough this might be overkill, but for longer expressions this can really help with these issues.
+
+```diff
++ use ProjektGopher\FFMpegTween\Utils\Expr;
+
+....
+
+-   return "if(eq(({$time})\\,0)\\,0\\,if(eq(({$time})\\,1)\\,1\\,pow(2\\,-10*({$time}))*sin((({$time})*10-0.75)*{$c4})+1))";
++   return Expr::if(
++       x: Expr::eq($time, '0'),
++       y: '0',
++       z: Expr::if(
++           x: Expr::eq($time, '1'),
++           y: '1',
++           z: "pow(2\\,-10*({$time}))*sin((({$time})*10-0.75)*{$c4})+1",
++       ),
++   );
+```
+
 ## Testing
 ```bash
 composer test
