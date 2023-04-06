@@ -3,7 +3,7 @@
 
 require_once __DIR__.'/../vendor/autoload.php';
 
-use ProjektGopher\FFMpegTween\Ease;
+use ProjektGopher\FFMpegTools\Ease;
 
 echo 'starting... (fail fast)'.PHP_EOL;
 

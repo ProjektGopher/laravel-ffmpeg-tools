@@ -34,12 +34,12 @@
     },
     "autoload": {
         "psr-4": {
-            "ProjektGopher\\FFMpegTween\\": "src/"
+            "ProjektGopher\\FFMpegTools\\": "src/"
         }
     },
     "autoload-dev": {
         "psr-4": {
-            "ProjektGopher\\FFMpegTween\\Tests\\": "tests/"
+            "ProjektGopher\\FFMpegTools\\Tests\\": "tests/"
         }
     },
     "scripts": {
@@ -59,10 +59,10 @@
     "extra": {
         "laravel": {
             "providers": [
-                "ProjektGopher\\FFMpegTween\\FFMpegTweenServiceProvider"
+                "ProjektGopher\\FFMpegTools\\FFMpegToolsServiceProvider"
             ],
             "aliases": {
-                "FFMpegTween": "ProjektGopher\\FFMpegTween\\Facades\\FFMpegTween"
+                "FFMpegTools": "ProjektGopher\\FFMpegTools\\Facades\\FFMpegTools"
             }
         }
     },

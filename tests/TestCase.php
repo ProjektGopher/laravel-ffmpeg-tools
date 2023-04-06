@@ -1,10 +1,10 @@
 <?php
 
-namespace ProjektGopher\FFMpegTween\Tests;
+namespace ProjektGopher\FFMpegTools\Tests;
 
 use Illuminate\Database\Eloquent\Factories\Factory;
 use Orchestra\Testbench\TestCase as Orchestra;
-use ProjektGopher\FFMpegTween\FFMpegTweenServiceProvider;
+use ProjektGopher\FFMpegTools\FFMpegToolsServiceProvider;
 
 class TestCase extends Orchestra
 {
@@ -13,14 +13,14 @@ class TestCase extends Orchestra
         parent::setUp();
 
         Factory::guessFactoryNamesUsing(
-            fn (string $modelName) => 'ProjektGopher\\FFMpegTween\\Database\\Factories\\'.class_basename($modelName).'Factory'
+            fn (string $modelName) => 'ProjektGopher\\FFMpegTools\\Database\\Factories\\'.class_basename($modelName).'Factory'
         );
     }
 
     protected function getPackageProviders($app)
     {
         return [
-            FFMpegTweenServiceProvider::class,
+            FFMpegToolsServiceProvider::class,
         ];
     }
 

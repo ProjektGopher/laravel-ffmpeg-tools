@@ -1,6 +1,6 @@
 <?php
 
-namespace ProjektGopher\FFMpegTween\Utils;
+namespace ProjektGopher\FFMpegTools\Utils;
 
 /**
  * Expr
