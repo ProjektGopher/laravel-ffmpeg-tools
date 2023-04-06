@@ -1,6 +1,6 @@
 <?php
 
-namespace ProjektGopher\FFMpegTween;
+namespace ProjektGopher\FFMpegTools;
 
 class Keyframe
 {

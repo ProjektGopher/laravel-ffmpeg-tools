@@ -28,7 +28,7 @@ The stringification of these math strings is ported from [This Gitlab repo](http
 ## Installation
 You can install the package via composer:
 ```bash
-composer require projektgopher/laravel-ffmpeg-tween
+composer require projektgopher/laravel-ffmpeg-tools
 ```
 
 ## Usage
@@ -37,9 +37,9 @@ For now this package can only be used within a Laravel app, but there are plans 
 
 ### Simple tween with delay and duration
 ```php
-use ProjektGopher\FFMpegTween\Tween;
-use ProjektGopher\FFMpegTween\Timing;
-use ProjektGopher\FFMpegTween\Ease;
+use ProjektGopher\FFMpegTools\Tween;
+use ProjektGopher\FFMpegTools\Timing;
+use ProjektGopher\FFMpegTools\Ease;
 
 $x = (new Tween())
     ->from("50")
@@ -51,10 +51,10 @@ $x = (new Tween())
 
 ### Animation sequences using keyframes
 ```php
-use ProjektGopher\FFMpegTween\Keyframe;
-use ProjektGopher\FFMpegTween\Timeline;
-use ProjektGopher\FFMpegTween\Timing;
-use ProjektGopher\FFMpegTween\Ease;
+use ProjektGopher\FFMpegTools\Keyframe;
+use ProjektGopher\FFMpegTools\Timeline;
+use ProjektGopher\FFMpegTools\Timing;
+use ProjektGopher\FFMpegTools\Ease;
 
 $x = new Timeline()
 $x->keyframe((new Keyframe)
@@ -82,7 +82,7 @@ When writing _long_ and **complicated** evaluated expressions, it can be easy to
 The `Expr` class can help with this. If your expression is short enough this might be overkill, but for longer expressions this can really help with these issues.
 
 ```diff
-+ use ProjektGopher\FFMpegTween\Utils\Expr;
++ use ProjektGopher\FFMpegTools\Utils\Expr;
 
 ....
 

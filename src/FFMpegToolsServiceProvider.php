@@ -1,11 +1,11 @@
 <?php
 
-namespace ProjektGopher\FFMpegTween;
+namespace ProjektGopher\FFMpegTools;
 
 use Spatie\LaravelPackageTools\Package;
 use Spatie\LaravelPackageTools\PackageServiceProvider;
 
-class FFMpegTweenServiceProvider extends PackageServiceProvider
+class FFMpegToolsServiceProvider extends PackageServiceProvider
 {
     public function configurePackage(Package $package): void
     {
