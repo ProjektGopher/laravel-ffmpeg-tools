@@ -1,8 +1,8 @@
 # Generate FFMpeg easing and tweening strings in Laravel.
-[![Latest Version on Packagist](https://img.shields.io/packagist/v/projektgopher/laravel-ffmpeg-tween.svg?style=flat-square)](https://packagist.org/packages/projektgopher/laravel-ffmpeg-tween)
-[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/projektgopher/laravel-ffmpeg-tween/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/projektgopher/laravel-ffmpeg-tween/actions?query=workflow%3Arun-tests+branch%3Amain)
-[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/projektgopher/laravel-ffmpeg-tween/phpstan.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/projektgopher/laravel-ffmpeg-tween/actions?query=workflow%3A"phpstan"+branch%3Amain)
-[![Total Downloads](https://img.shields.io/packagist/dt/projektgopher/laravel-ffmpeg-tween.svg?style=flat-square)](https://packagist.org/packages/projektgopher/laravel-ffmpeg-tween)
+[![Latest Version on Packagist](https://img.shields.io/packagist/v/projektgopher/laravel-ffmpeg-tools.svg?style=flat-square)](https://packagist.org/packages/projektgopher/laravel-ffmpeg-tools)
+[![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/projektgopher/laravel-ffmpeg-tools/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/projektgopher/laravel-ffmpeg-tools/actions?query=workflow%3Arun-tests+branch%3Amain)
+[![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/projektgopher/laravel-ffmpeg-tools/phpstan.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/projektgopher/laravel-ffmpeg-tools/actions?query=workflow%3A"phpstan"+branch%3Amain)
+[![Total Downloads](https://img.shields.io/packagist/dt/projektgopher/laravel-ffmpeg-tools.svg?style=flat-square)](https://packagist.org/packages/projektgopher/laravel-ffmpeg-tools)
 
 FFMpeg can be opaque in its commands. Take the following example:
 ```bash
