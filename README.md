@@ -28,7 +28,7 @@ The stringification of these math strings is ported from [This Gitlab repo](http
 ## Installation
 You can install the package via composer:
 ```bash
-composer require projektgopher/laravel-ffmpeg-tween
+composer require projektgopher/laravel-ffmpeg-tools
 ```
 
 ## Usage
