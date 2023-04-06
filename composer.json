@@ -1,12 +1,12 @@
 {
-    "name": "projektgopher/laravel-ffmpeg-tween",
+    "name": "projektgopher/laravel-ffmpeg-tools",
     "description": "Generates strings for use in ffmpeg commands to tween between values with easings.",
     "keywords": [
         "ProjektGopher",
         "laravel",
-        "laravel-ffmpeg-tween"
+        "laravel-ffmpeg-tools"
     ],
-    "homepage": "https://github.com/projektgopher/laravel-ffmpeg-tween",
+    "homepage": "https://github.com/projektgopher/laravel-ffmpeg-tools",
     "license": "MIT",
     "authors": [
         {
