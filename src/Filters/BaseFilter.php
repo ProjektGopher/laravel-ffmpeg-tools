@@ -34,4 +34,11 @@ abstract class BaseFilter
     {
         return $this->build();
     }
+
+    public function __call(string $name, array $arguments): self
+    {
+        $this->properties[$name] = (string) $arguments[0];
+
+        return $this;
+    }
 }
