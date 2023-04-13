@@ -3,6 +3,7 @@
 namespace ProjektGopher\FFMpegTools\Filters\Video;
 
 use ProjektGopher\FFMpegTools\Filters\BaseFilter;
+use ProjektGopher\FFMpegTools\Filters\Traits\HasTimelineSupport;
 
 /**
  * DrawText
@@ -113,6 +114,8 @@ use ProjektGopher\FFMpegTools\Filters\BaseFilter;
  */
 final class DrawText extends BaseFilter
 {
+    use HasTimelineSupport;
+    
     protected string $filter_name = 'drawtext';
 
     public function rate(int $value): self
