@@ -22,7 +22,9 @@ abstract class BaseFilter
         $properties = [];
 
         foreach ($this->properties as $key => $value) {
-            $properties[] = "{$key}={$value}";
+            strpos($value, ' ') !== false
+                ? $properties[] = "{$key}='{$value}'"
+                : $properties[] = "{$key}={$value}";
         }
 
         $properties = implode(':', $properties);
