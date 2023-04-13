@@ -12,7 +12,7 @@ abstract class BaseFilter
     {
     }
 
-    public static function make(): self
+    public static function make(): static
     {
         return new static();
     }
@@ -25,7 +25,7 @@ abstract class BaseFilter
             $properties[] = "{$key}={$value}";
         }
 
-        $properties = implode(':', $this->properties);
+        $properties = implode(':', $properties);
 
         return "{$this->filter_name}={$properties}";
     }
