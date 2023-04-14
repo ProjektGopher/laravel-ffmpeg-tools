@@ -1,15 +1,15 @@
 <?php
 
-use ProjektGopher\FFMpegTools\Filters\Video\DrawText;
+use ProjektGopher\FFMpegTools\Filters\Video\VideoFilter;
 
 it('works', function () {
     expect(
-        (string) DrawText::make()
+        (string) VideoFilter::drawtext()
             ->text('Hello World')
             ->x(10)
             ->y(10)
-            ->fontSize(20)
-            ->fontColor('white')
+            ->fontsize(20)
+            ->fontcolor('white')
             ->box(1)
     )->toEqual("drawtext=text='Hello World':x=10:y=10:fontsize=20:fontcolor=white:box=1");
 });
