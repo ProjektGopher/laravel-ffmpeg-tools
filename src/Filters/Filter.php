@@ -24,10 +24,10 @@ abstract class Filter
         foreach ($this->properties as $key => $value) {
             $key = strtolower($key);
 
-            if(str_contains($value, ' ')) {
+            if (str_contains($value, ' ')) {
                 $value = "'{$value}'";
             }
-            
+
             $properties[] = "{$key}={$value}";
         }
 
