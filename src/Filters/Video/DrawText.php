@@ -2,7 +2,7 @@
 
 namespace ProjektGopher\FFMpegTools\Filters\Video;
 
-use ProjektGopher\FFMpegTools\Filters\BaseFilter;
+use ProjektGopher\FFMpegTools\Filters\Filter;
 use ProjektGopher\FFMpegTools\Filters\Traits\SupportsTimelineEditing;
 
 /**
@@ -10,69 +10,28 @@ use ProjektGopher\FFMpegTools\Filters\Traits\SupportsTimelineEditing;
  *
  * The parameters for x and y are expressions containing the following constants and functions:
  *
- * dar
- * input display aspect ratio, it is the same as (w / h) * sar
- *
- * hsub
- * vsub
- * horizontal and vertical chroma subsample values. For example for the pixel format "yuv422p" hsub is 2 and vsub is 1.
- *
- * line_h, lh
- * the height of each text line
- *
- * main_h, h, H
- * the input height
- *
- * main_w, w, W
- * the input width
- *
- * max_glyph_a, ascent
- * the maximum distance from the baseline to the highest/upper grid coordinate used to place a glyph outline point, for all the rendered glyphs. It is a positive value, due to the grid’s orientation with the Y axis upwards.
- *
- * max_glyph_d, descent
- * the maximum distance from the baseline to the lowest grid coordinate used to place a glyph outline point, for all the rendered glyphs. This is a negative value, due to the grid’s orientation, with the Y axis upwards.
- *
- * max_glyph_h
- * maximum glyph height, that is the maximum height for all the glyphs contained in the rendered text, it is equivalent to ascent - descent.
- *
- * max_glyph_w
- * maximum glyph width, that is the maximum width for all the glyphs contained in the rendered text
- *
- * n
- * the number of input frame, starting from 0
- *
- * rand(min, max)
- * return a random number included between min and max
- *
- * sar
- * The input sample aspect ratio.
- *
- * t
- * timestamp expressed in seconds, NAN if the input timestamp is unknown
- *
- * text_h, th
- * the height of the rendered text
- *
- * text_w, tw
- * the width of the rendered text
- *
- * x
- * y
- * the x and y offset coordinates where the text is drawn.
- *
- * These parameters allow the x and y expressions to refer to each other, so you can for example specify y=x/dar.
- *
- * pict_type
- * A one character description of the current frame’s picture type.
- *
- * pkt_pos
- * The current packet’s position in the input file or stream (in bytes, from the start of the input). A value of -1 indicates this info is not available.
- *
- * duration
- * The current packet’s duration, in seconds.
- *
- * pkt_size
- * The current packet’s size (in bytes).
+ * dar - input display aspect ratio, it is the same as (w / h) * sar
+ * hsub - horizontal and vertical chroma subsample values. For example for the pixel format "yuv422p" hsub is 2 and vsub is 1.
+ * vsub - horizontal and vertical chroma subsample values. For example for the pixel format "yuv422p" hsub is 2 and vsub is 1.
+ * line_h, lh - the height of each text line
+ * main_h, h, H - the input height
+ * main_w, w, W - the input width
+ * max_glyph_a, ascent - the maximum distance from the baseline to the highest/upper grid coordinate used to place a glyph outline point, for all the rendered glyphs. It is a positive value, due to the grid’s orientation with the Y axis upwards.
+ * max_glyph_d, descent - the maximum distance from the baseline to the lowest grid coordinate used to place a glyph outline point, for all the rendered glyphs. This is a negative value, due to the grid’s orientation, with the Y axis upwards.
+ * max_glyph_h - maximum glyph height, that is the maximum height for all the glyphs contained in the rendered text, it is equivalent to ascent - descent.
+ * max_glyph_w - maximum glyph width, that is the maximum width for all the glyphs contained in the rendered text
+ * n - the number of input frame, starting from 0
+ * rand(min, max) - return a random number included between min and max
+ * sar - The input sample aspect ratio.
+ * t - timestamp expressed in seconds, NAN if the input timestamp is unknown
+ * text_h, th - the height of the rendered text
+ * text_w, tw - the width of the rendered text
+ * x - the x and y offset coordinates where the text is drawn. These parameters allow the x and y expressions to refer to each other, so you can for example specify y=x/dar.
+ * y - the x and y offset coordinates where the text is drawn. These parameters allow the x and y expressions to refer to each other, so you can for example specify y=x/dar.
+ * pict_type - A one character description of the current frame’s picture type.
+ * pkt_pos - The current packet’s position in the input file or stream (in bytes, from the start of the input). A value of -1 indicates this info is not available.
+ * duration - The current packet’s duration, in seconds.
+ * pkt_size - The current packet’s size (in bytes).
  *
  * @see https://ffmpeg.org/ffmpeg-filters.html#drawtext-1
  *
@@ -92,7 +51,7 @@ use ProjektGopher\FFMpegTools\Filters\Traits\SupportsTimelineEditing;
  * @method self font(string $value) Set the font family to be used for drawing text. By default Sans.
  * @method self fontfile(string $value) Set the font file to be used for drawing text. The path must be included. This parameter is mandatory if the fontconfig support is disabled.
  * @method self alpha(string $value) Draw the text applying alpha blending. The value can be a number between 0.0 and 1.0. The expression accepts the same variables x, y as well. The default value is 1. Please see fontcolor_expr.
- * @method self fontsize(int $value) Set the font size to be used for drawing text. The default value of fontsize is 16.
+ * @method self fontsize(string $value) Set the font size to be used for drawing text. The default value of fontsize is 16.
  * @method self text_shaping(int $value) If set to 1, attempt to shape the text (for example, reverse the order of right-to-left text and join Arabic characters) before drawing it. Otherwise, just draw the text exactly as given. By default 1 (if supported).
  * @method self ft_load_flags(int $value) The flags to be used for loading the fonts. The flags map the corresponding flags supported by libfreetype, and are a combination of the following values: default no_scale no_hinting render no_bitmap vertical_layout force_autohint crop_bitmap pedantic ignore_global_advance_width no_recurse ignore_transform monochrome linear_design no_autohint Default value is "default". For more information consult the documentation for the FT_LOAD_* libfreetype flags.
  * @method self shadowcolor(string $value) The color to be used for drawing a shadow behind the drawn text. For the syntax of this option, check the (ffmpeg-utils)"Color" section in the ffmpeg-utils manual. The default value of shadowcolor is "black".
@@ -112,7 +71,7 @@ use ProjektGopher\FFMpegTools\Filters\Traits\SupportsTimelineEditing;
  * @method self x(string $value) The expressions which specify the offsets where text will be drawn within the video frame. They are relative to the top/left border of the output image. The default value of x and y is "0".
  * @method self y(string $value) The expressions which specify the offsets where text will be drawn within the video frame. They are relative to the top/left border of the output image. The default value of x and y is "0".
  */
-final class DrawText extends BaseFilter
+final class DrawText extends Filter
 {
     use SupportsTimelineEditing;
 

@@ -4,7 +4,7 @@ namespace ProjektGopher\FFMpegTools;
 
 use ProjektGopher\FFMpegTools\Utils\Expr;
 
-class Tween
+final class Tween
 {
     protected string $from;
 
@@ -16,14 +16,14 @@ class Tween
 
     protected string $ease;
 
-    public function from(string $from): self
+    public function from(string|int|float $from): self
     {
         $this->from = "({$from})";
 
         return $this;
     }
 
-    public function to(string $to): self
+    public function to(string|int|float $to): self
     {
         $this->to = "({$to})";
 
@@ -94,5 +94,10 @@ class Tween
     public static function __callStatic(string $name, array $arguments): self
     {
         return (new self)->$name(...$arguments);
+    }
+
+    public static function make(): self
+    {
+        return new self;
     }
 }

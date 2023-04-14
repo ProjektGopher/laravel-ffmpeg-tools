@@ -2,7 +2,7 @@
 
 namespace ProjektGopher\FFMpegTools\Filters;
 
-abstract class BaseFilter
+abstract class Filter
 {
     protected string $filter_name;
 
@@ -22,9 +22,13 @@ abstract class BaseFilter
         $properties = [];
 
         foreach ($this->properties as $key => $value) {
-            strpos($value, ' ') !== false
-                ? $properties[] = "{$key}='{$value}'"
-                : $properties[] = "{$key}={$value}";
+            $key = strtolower($key);
+
+            if (str_contains($value, ' ')) {
+                $value = "'{$value}'";
+            }
+
+            $properties[] = "{$key}={$value}";
         }
 
         $properties = implode(':', $properties);
