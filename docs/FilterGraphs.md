@@ -45,4 +45,4 @@ For something this simple, the `FilterGraph` class might be a bit overkill; But 
 The `FilterGraph` class is `final` and can therefor not be extended.
 
 ## Testing
-###
+You can call the `->build()` method after the end of your method chain in order to `dd()` for manual inspection, or to `assert` against.
