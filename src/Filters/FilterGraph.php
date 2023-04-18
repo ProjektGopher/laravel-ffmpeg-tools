@@ -35,22 +35,18 @@ final class FilterGraph
             return [$filters];
         }
 
-        if (is_array($filters)) {
-            $thing = [];
-            foreach ($filters as $filter) {
-                $thing[] = $this->validateFilters($filter)[0];
-            }
-
-            return $thing;
+        $thing = [];
+        foreach ($filters as $filter) {
+            $thing[] = $this->validateFilters($filter)[0];
         }
+
+        return $thing;
     }
 
     public function buildFilterString(array $filter): string
     {
-        $filterString = $filter['in'].' ';
-
+        $filterString = "{$filter['in']} ";
         $filterString .= implode(', ', $filter['filters']);
-
         if ($filter['out']) {
             $filterString .= " {$filter['out']}";
         }
@@ -61,11 +57,9 @@ final class FilterGraph
     public function build(): string
     {
         $filters = [];
-
         foreach ($this->filters as $filter) {
             $filters[] = $this->buildFilterString($filter);
         }
-
         $filters = implode(';', $filters);
 
         return "-filter_complex \"{$filters}\"";
