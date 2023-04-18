@@ -98,6 +98,10 @@ The `Expr` class can help with this. If your expression is short enough this mig
 +   );
 ```
 
+## Docs
+Here's some more detailed information on some of this package's features:
+[Filter Graphs](docs/FilterGraphs.md)
+
 ## Testing
 ```bash
 composer test
