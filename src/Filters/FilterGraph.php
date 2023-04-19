@@ -17,12 +17,21 @@ final class FilterGraph
         string|null $out = null,
     ): self {
         $this->filters[] = [
-            'in' => $in,
+            'in' => $this->validateStreams($in),
             'filters' => $this->validateFilters($filters),
-            'out' => $out,
+            'out' => $out ? $this->validateStreams($out) : null,
         ];
 
         return $this;
+    }
+
+    public function validateStreams(string $streams): string
+    {
+        if (! preg_match('/^(\[[a-zA-Z0-9-_:]+\])+$/', $streams)) {
+            throw new \Exception("Could not parse stream {$streams}");
+        }
+
+        return $streams;
     }
 
     public function validateFilters(string|array|Filter $filters): array
