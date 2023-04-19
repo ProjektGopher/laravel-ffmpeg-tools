@@ -1,4 +1,4 @@
-# Generate FFMpeg easing and tweening strings in Laravel.
+# Tools and utilities to help generate complex strings for FFMpeg in Laravel.
 [![Latest Version on Packagist](https://img.shields.io/packagist/v/projektgopher/laravel-ffmpeg-tools.svg?style=flat-square)](https://packagist.org/packages/projektgopher/laravel-ffmpeg-tools)
 [![GitHub Tests Action Status](https://img.shields.io/github/actions/workflow/status/projektgopher/laravel-ffmpeg-tools/run-tests.yml?branch=main&label=tests&style=flat-square)](https://github.com/projektgopher/laravel-ffmpeg-tools/actions?query=workflow%3Arun-tests+branch%3Amain)
 [![GitHub Code Style Action Status](https://img.shields.io/github/actions/workflow/status/projektgopher/laravel-ffmpeg-tools/phpstan.yml?branch=main&label=code%20style&style=flat-square)](https://github.com/projektgopher/laravel-ffmpeg-tools/actions?query=workflow%3A"phpstan"+branch%3Amain)
@@ -32,107 +32,21 @@ composer require projektgopher/laravel-ffmpeg-tools
 ```
 
 ## Usage
+ - [Easing](docs/Easing.md)
+ - [Expressions](docs/Expressions.md)
+ - [Filters](docs/Filters.md)
+ - [Filter Graphs](docs/FilterGraphs.md)
+ - [Timelines and Keyframes](docs/Timelines.md)
+ - [Tweening](docs/Tweening.md)
+
 ### Using outside of a Laravel application
 For now this package can only be used within a Laravel app, but there are plans to extract the core functionality into a separate package that can be used without being bound to the framework.
 
-### Simple tween with delay and duration
-```php
-use ProjektGopher\FFMpegTools\Tween;
-use ProjektGopher\FFMpegTools\Timing;
-use ProjektGopher\FFMpegTools\Ease;
-
-$x = (new Tween())
-    ->from("50")
-    ->to("100")
-    ->delay(Timing::seconds(1))
-    ->duration(Timing::milliseconds(300))
-    ->ease(Ease::OutSine);
-```
-
-### Animation sequences using keyframes
-```php
-use ProjektGopher\FFMpegTools\Keyframe;
-use ProjektGopher\FFMpegTools\Timeline;
-use ProjektGopher\FFMpegTools\Timing;
-use ProjektGopher\FFMpegTools\Ease;
-
-$x = new Timeline()
-$x->keyframe((new Keyframe)
-    ->value('-text_w') // outside left of frame
-    ->hold(Timing::seconds(1))
-);
-$x->keyframe((new Keyframe)
-    ->value('(main_w/2)-(text_w/2)') // center
-    ->ease(Ease::OutElastic)
-    ->duration(Timing::seconds(1))
-    ->hold(Timing::seconds(3))
-);
-$x->keyframe((new Keyframe)
-    ->value('main_w') // outside right of frame
-    ->ease(Ease::InBack)
-    ->duration(Timing::seconds(1))
-);
-```
-
-> **Note** `new Timeline()` returns a _fluent_ api, meaning methods can be chained as well.
-
-## Expression Helpers
-When writing _long_ and **complicated** evaluated expressions, it can be easy to lose track of extra/missing perentheses, missing parameters, or unescaped commas. Especially when the whole expression _has_ to be on one line without any linebreaks or whitespace.
-
-The `Expr` class can help with this. If your expression is short enough this might be overkill, but for longer expressions this can really help with these issues.
-
-```diff
-+ use ProjektGopher\FFMpegTools\Utils\Expr;
-
-....
-
--   return "if(eq(({$time})\\,0)\\,0\\,if(eq(({$time})\\,1)\\,1\\,pow(2\\,-10*({$time}))*sin((({$time})*10-0.75)*{$c4})+1))";
-+   return Expr::if(
-+       x: Expr::eq($time, '0'),
-+       y: '0',
-+       z: Expr::if(
-+           x: Expr::eq($time, '1'),
-+           y: '1',
-+           z: "pow(2\\,-10*({$time}))*sin((({$time})*10-0.75)*{$c4})+1",
-+       ),
-+   );
-```
-
-## Docs
-Here's some more detailed information on some of this package's features:
-[Filter Graphs](docs/FilterGraphs.md)
-
 ## Testing
-```bash
-composer test
-```
-
-### Visual Snapshot Testing
-#### Easing
-To generate plots of all `Ease` methods, from the project root, run
-```bash
-./scripts/generateEasings
-```
-The 256x256 PNGs will be generated in the `tests/Snapshots/Easings` directory.
-These snapshots will be ignored by git, but allow visual inspection of the plots to
-compare against known good sources, like [Easings.net](https://easings.net).
-
-#### Timelines
-To generate a video using a `Timeline` with `Keyframes`, from the project root, run
-```bash
-./scripts/generateTimeline
-```
-The 256x256 MP4 will be generated in the `tests/Snapshots/Timelines` directory.
-These snapshots will also be ignored by git, but again allow for a visual
-inspection to ensure they match the expected output.
-
-> **Note** The `scripts` directory _may_ need to have its permissions changed to allow script execution
-```bash
-chmod -R 777 ./scripts
-```
+ - [Instructions](docs/Testing.md)
 
 ## Changelog
-Please see [CHANGELOG](CHANGELOG.md) for more information on what has changed recently.
+Please see [RELEASES](releases) for more information on what has changed recently.
 
 ## Contributing
 Please see [CONTRIBUTING](CONTRIBUTING.md) for details.
