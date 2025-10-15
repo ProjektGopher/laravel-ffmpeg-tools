@@ -18,7 +18,7 @@ jobs:
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 12.*
-            canvas: ^9.0
+            canvas: ^10.0
             carbon: 3.*
           - laravel: 11.*
             canvas: 9.*
