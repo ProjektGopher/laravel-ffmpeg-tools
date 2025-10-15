@@ -19,7 +19,7 @@ jobs:
         include:
           - laravel: 12.*
             canvas: ^9.0
-            carbon: ^2.0
+            carbon: 3.*
           - laravel: 11.*
             canvas: 9.*
             carbon: 2.*
