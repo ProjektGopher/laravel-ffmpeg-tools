@@ -18,12 +18,15 @@ jobs:
         stability: [prefer-lowest, prefer-stable]
         include:
           - laravel: 12.*
+            testbench: ^10.0
             canvas: ^10.0
             carbon: 3.*
           - laravel: 11.*
+            testbench: ^9.6
             canvas: 9.*
             carbon: 2.*
           - laravel: 10.*
+            testbench: ^8.11
             canvas: ^8.11
             carbon: 2.*
         exclude:
@@ -52,7 +55,7 @@ jobs:
 
       - name: Install dependencies
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/canvas:${{ matrix.canvas }}" "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "orchestra/canvas:${{ matrix.canvas }}" "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: List Installed Dependencies
