@@ -13,19 +13,32 @@ jobs:
       fail-fast: true
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
-        php: [8.3, 8.2, 8.1]
-        laravel: [11.*, 10.*]
+        php: [8.5, 8.4, 8.3, 8.2, 8.1]
+        laravel: [12.*, 11.*, 10.*]
         stability: [prefer-lowest, prefer-stable]
         include:
+          - laravel: 12.*
+            testbench: ^10.0
+            canvas: ^10.0
+            carbon: 3.*
           - laravel: 11.*
+            testbench: ^9.6
             canvas: 9.*
             carbon: 2.*
           - laravel: 10.*
+            testbench: ^8.11
             canvas: ^8.11
             carbon: 2.*
         exclude:
+          - laravel: 12.*
+            php: 8.1
           - laravel: 11.*
             php: 8.1
+          - laravel: 10.*
+            php: 8.5
+          # prefer-lowest installs old dependency versions that aren't PHP 8.5 compatible yet
+          - php: 8.5
+            stability: prefer-lowest
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
 
@@ -46,8 +59,9 @@ jobs:
           echo "::add-matcher::${{ runner.tool_cache }}/phpunit.json"
 
       - name: Install dependencies
+        shell: bash
         run: |
-          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/canvas:${{ matrix.canvas }}" "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
+          composer require "laravel/framework:${{ matrix.laravel }}" "orchestra/testbench:${{ matrix.testbench }}" "orchestra/canvas:${{ matrix.canvas }}" "nesbot/carbon:${{ matrix.carbon }}" --no-interaction --no-update
           composer update --${{ matrix.stability }} --prefer-dist --no-interaction
 
       - name: List Installed Dependencies
