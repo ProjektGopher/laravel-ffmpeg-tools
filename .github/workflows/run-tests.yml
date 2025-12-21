@@ -36,6 +36,7 @@ jobs:
             php: 8.1
           - laravel: 10.*
             php: 8.5
+          # prefer-lowest installs old dependency versions that aren't PHP 8.5 compatible yet
           - php: 8.5
             stability: prefer-lowest
 
