@@ -46,7 +46,7 @@
         "post-autoload-dump": "@php ./vendor/bin/testbench package:discover --ansi",
         "analyse": "vendor/bin/phpstan analyse",
         "test": "vendor/bin/pest",
-        "test-coverage": "vendor/bin/pest --coverage",
+        "test-coverage": "XDEBUG_MODE=coverage herd debug ./vendor/bin/pest --coverage",
         "lint": "vendor/bin/pint"
     },
     "config": {
