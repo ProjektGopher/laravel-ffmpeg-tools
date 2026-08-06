@@ -13,7 +13,7 @@ jobs:
       fail-fast: true
       matrix:
         os: [macos-latest, ubuntu-latest, windows-latest]
-        php: [8.6, 8.5, 8.4, 8.3, 8.2]
+        php: [8.5, 8.4, 8.3, 8.2]
         laravel: [13.*, 12.*, 11.*]
         stability: [prefer-lowest, prefer-stable]
         include:
@@ -33,10 +33,8 @@ jobs:
           # Laravel 13 requires PHP ^8.3
           - laravel: 13.*
             php: 8.2
-          # prefer-lowest installs old dependency versions that aren't PHP 8.5+ compatible yet
+          # prefer-lowest installs old dependency versions that aren't PHP 8.5 compatible yet
           - php: 8.5
-            stability: prefer-lowest
-          - php: 8.6
             stability: prefer-lowest
 
     name: P${{ matrix.php }} - L${{ matrix.laravel }} - ${{ matrix.stability }} - ${{ matrix.os }}
